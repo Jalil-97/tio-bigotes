@@ -1,0 +1,114 @@
+/* Estilos base compartidos por todas las pantallas. */
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px 16px 0;
+}
+
+.tabs button {
+  font: inherit;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.tabs button[aria-pressed='true'] {
+  font-weight: bold;
+  border-width: 2px;
+}
+
+.pantalla {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.pantalla h2 {
+  margin: 24px 0 8px;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.pantalla ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pantalla li {
+  padding: 4px 0;
+}
+
+.pantalla input,
+.pantalla select,
+.pantalla button {
+  font: inherit;
+  padding: 6px 8px;
+}
+
+.nuevo {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.nuevo h2 {
+  margin-top: 0;
+  border: none;
+}
+
+.campos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.campos label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  gap: 2px;
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.precio {
+  white-space: nowrap;
+}
+
+.vacio {
+  color: #777;
+}
+
+.error {
+  color: #b00020;
+  margin: 4px 0;
+}
+
+.exito {
+  color: #1b5e20;
+  font-weight: bold;
+  margin: 4px 0;
+}
+
+.link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #0645ad;
+  text-decoration: underline;
+  cursor: pointer;
+}

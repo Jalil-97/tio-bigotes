@@ -1,0 +1,22 @@
+.items {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.items th,
+.items td {
+  text-align: left;
+  padding: 4px 6px;
+  border-bottom: 1px solid #eee;
+}
+
+.cantidad-input {
+  width: 70px;
+}
+
+.total {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 16px 0 8px;
+}

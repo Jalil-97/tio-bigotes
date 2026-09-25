@@ -1,27 +1,8 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { CATEGORIAS, labelCategoria } from '../lib/categorias'
+import { formatoPrecio, mensajeError, porNombre } from '../lib/formato'
 import './Catalogo.css'
-
-const formatoPrecio = new Intl.NumberFormat('es-AR', {
-  style: 'currency',
-  currency: 'ARS',
-})
-
-function porNombre(a, b) {
-  return a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' })
-}
-
-// Convierte errores de Supabase / red en un mensaje entendible.
-function mensajeError(accion, error) {
-  if (error?.code === 'PGRST116') {
-    return `No se pudo ${accion}: el producto no existe o no hay permiso para modificarlo.`
-  }
-  if (error?.message?.includes('Failed to fetch')) {
-    return `No se pudo ${accion}: no hay conexión con el servidor. Revisá internet y probá de nuevo.`
-  }
-  return `No se pudo ${accion}: ${error?.message ?? 'error desconocido'}.`
-}
 
 // Valida nombre y precio tipeados. Devuelve { error } o { nombre, precio }.
 function validar(nombre, precioTexto) {
@@ -73,7 +54,7 @@ function Catalogo() {
   const sinCategoria = activos.filter((p) => !CATEGORIAS.some((c) => c.valor === p.categoria))
 
   return (
-    <div className="catalogo">
+    <div className="pantalla">
       <h1>Catálogo</h1>
 
       <FormNuevoProducto onCreado={agregar} />
@@ -167,7 +148,7 @@ function FormNuevoProducto({ onCreado }) {
   }
 
   return (
-    <form className="nuevo" onSubmit={guardar}>
+    <form className="nuevo" onSubmit={guardar} noValidate>
       <h2>Agregar producto</h2>
       <div className="campos">
         <label>
@@ -259,7 +240,7 @@ function FilaProducto({ producto, onActualizado }) {
   if (editando) {
     return (
       <li>
-        <form className="fila" onSubmit={guardar} onKeyDown={(e) => e.key === 'Escape' && cancelar()}>
+        <form className="fila" onSubmit={guardar} noValidate onKeyDown={(e) => e.key === 'Escape' && cancelar()}>
           <input
             autoFocus
             value={nombre}

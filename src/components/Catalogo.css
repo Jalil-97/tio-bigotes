@@ -1,0 +1,113 @@
+.catalogo {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.catalogo h2 {
+  margin: 24px 0 8px;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.catalogo ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.catalogo li {
+  padding: 4px 0;
+}
+
+.catalogo input,
+.catalogo select,
+.catalogo button {
+  font: inherit;
+  padding: 6px 8px;
+}
+
+.nuevo {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.nuevo h2 {
+  margin-top: 0;
+  border: none;
+}
+
+.campos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.campos label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  gap: 2px;
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.fila .editable {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.fila .editable:hover {
+  border-color: #ccc;
+}
+
+.fila > .nombre,
+.fila > input:first-child {
+  flex: 1;
+}
+
+.precio {
+  white-space: nowrap;
+}
+
+.precio-input {
+  width: 110px;
+}
+
+.vacio {
+  color: #777;
+}
+
+.error {
+  color: #b00020;
+  margin: 4px 0;
+}
+
+.desactivados {
+  margin-top: 32px;
+}
+
+.link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #0645ad;
+  text-decoration: underline;
+  cursor: pointer;
+}

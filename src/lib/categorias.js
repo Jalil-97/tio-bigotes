@@ -1,11 +1,17 @@
 // Categorías fijas del menú, en el orden en que se muestran.
-// Los valores tienen que coincidir exactamente con los que acepta la columna
-// productos.categoria en Supabase.
+// `valor` es lo que se guarda en productos.categoria y tiene que coincidir
+// exactamente con el CHECK constraint de la base. `label` es lo que se ve en
+// pantalla.
 export const CATEGORIAS = [
-  'Pizzas',
-  'Empanadas',
-  'Bebidas con alcohol',
-  'Bebidas sin alcohol',
-  'Promociones',
-  'Postres',
+  { valor: 'pizzas', label: 'Pizzas' },
+  { valor: 'empanadas', label: 'Empanadas' },
+  { valor: 'bebidas_con_alcohol', label: 'Bebidas con alcohol' },
+  { valor: 'bebidas_sin_alcohol', label: 'Bebidas sin alcohol' },
+  { valor: 'promociones', label: 'Promociones' },
+  { valor: 'postres', label: 'Postres' },
 ]
+
+// Devuelve el label de un valor guardado (o el valor tal cual si no se conoce).
+export function labelCategoria(valor) {
+  return CATEGORIAS.find((c) => c.valor === valor)?.label ?? valor
+}

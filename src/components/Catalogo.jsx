@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
-import { CATEGORIAS } from '../lib/categorias'
+import { CATEGORIAS, labelCategoria } from '../lib/categorias'
 import './Catalogo.css'
 
 const formatoPrecio = new Intl.NumberFormat('es-AR', {
@@ -70,7 +70,7 @@ function Catalogo() {
   const activos = productos.filter((p) => p.activo)
   const desactivados = productos.filter((p) => !p.activo).sort(porNombre)
   // Por si hubiera en la base algún producto con una categoría fuera de las 6.
-  const sinCategoria = activos.filter((p) => !CATEGORIAS.includes(p.categoria))
+  const sinCategoria = activos.filter((p) => !CATEGORIAS.some((c) => c.valor === p.categoria))
 
   return (
     <div className="catalogo">
@@ -78,11 +78,11 @@ function Catalogo() {
 
       <FormNuevoProducto onCreado={agregar} />
 
-      {CATEGORIAS.map((categoria) => {
-        const items = activos.filter((p) => p.categoria === categoria).sort(porNombre)
+      {CATEGORIAS.map(({ valor, label }) => {
+        const items = activos.filter((p) => p.categoria === valor).sort(porNombre)
         return (
-          <section key={categoria}>
-            <h2>{categoria}</h2>
+          <section key={valor}>
+            <h2>{label}</h2>
             {items.length === 0 ? (
               <p className="vacio">Sin productos.</p>
             ) : (
@@ -133,7 +133,7 @@ function Catalogo() {
 
 function FormNuevoProducto({ onCreado }) {
   const [nombre, setNombre] = useState('')
-  const [categoria, setCategoria] = useState(CATEGORIAS[0])
+  const [categoria, setCategoria] = useState(CATEGORIAS[0].valor)
   const [precio, setPrecio] = useState('')
   const [guardando, setGuardando] = useState(false)
   const [error, setError] = useState(null)
@@ -178,8 +178,8 @@ function FormNuevoProducto({ onCreado }) {
           Categoría
           <select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
             {CATEGORIAS.map((c) => (
-              <option key={c} value={c}>
-                {c}
+              <option key={c.valor} value={c.valor}>
+                {c.label}
               </option>
             ))}
           </select>
@@ -338,7 +338,7 @@ function FilaDesactivado({ producto, onActualizado }) {
     <li>
       <div className="fila">
         <span className="nombre">
-          {producto.nombre} <span className="vacio">({producto.categoria})</span>
+          {producto.nombre} <span className="vacio">({labelCategoria(producto.categoria)})</span>
         </span>
         <span className="precio">{formatoPrecio.format(producto.precio)}</span>
         <button type="button" onClick={reactivar} disabled={guardando}>

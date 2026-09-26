@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabaseClient'
 import { CATEGORIAS } from '../lib/categorias'
 import { MEDIOS_PAGO } from '../lib/mediosPago'
 import { TIPOS_ENTREGA } from '../lib/tiposEntrega'
+import { estadoInicial } from '../lib/estados'
 import { formatoPrecio, mensajeError, porNombre } from '../lib/formato'
 import './NuevoPedido.css'
 
@@ -132,6 +133,7 @@ function NuevoPedido() {
         tipo_entrega: tipoEntrega,
         direccion: direccion.trim() || null,
         medio_pago: medioPago,
+        estado: estadoInicial(medioPago),
         items: items.map((it) => ({
           nombre: it.nombre,
           precio_unitario: it.precio,

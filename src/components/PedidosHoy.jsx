@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
-import { labelEstado, siguienteEstado } from '../lib/estados'
+import { labelEstado, siguienteEstado, textoAccion } from '../lib/estados'
 import { labelTipoEntrega } from '../lib/tiposEntrega'
 import { formatoPrecio, mensajeError } from '../lib/formato'
 import './PedidosHoy.css'
@@ -140,7 +140,7 @@ function FilaPedido({ pedido, onActualizado }) {
         <td>
           {siguiente && (
             <button type="button" onClick={avanzar} disabled={guardando}>
-              {guardando ? 'Guardando…' : `Pasar a: ${labelEstado(siguiente)}`}
+              {guardando ? 'Guardando…' : textoAccion(pedido)}
             </button>
           )}
         </td>

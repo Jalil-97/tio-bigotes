@@ -1,11 +1,63 @@
-/* Estilos base compartidos por todas las pantallas. */
+/* Identidad visual: todos los colores y fuentes salen de acá. */
+:root {
+  --color-fondo: #faf4e7;
+  --color-texto: #241610;
+  --color-marca: #b7202a; /* header, botones principales, pestaña activa */
+  --color-marca-secundario: #d89a2e; /* bordes, hover, detalles chicos */
+
+  /* Derivados de la paleta. */
+  --color-superficie: #fffdf8;
+  --color-borde-suave: color-mix(in srgb, var(--color-marca-secundario) 35%, transparent);
+  --color-texto-suave: color-mix(in srgb, var(--color-texto) 60%, transparent);
+  --color-sobre-marca: var(--color-fondo);
+
+  /* Mensajes operativos: no son color de marca. */
+  --color-error: #b00020;
+  --color-exito: #1b5e20;
+
+  --font-titulos: 'Oswald', 'Arial Narrow', sans-serif;
+  --font-texto: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--font-texto);
+}
+
+h1,
+h2 {
+  font-family: var(--font-titulos);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+h1 {
+  text-transform: uppercase;
+}
+
+/* Header y pestañas */
+.header {
+  background: var(--color-marca);
+  color: var(--color-sobre-marca);
+  border-bottom: 4px solid var(--color-marca-secundario);
+}
+
+.marca {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  font-family: var(--font-titulos);
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   max-width: 720px;
   margin: 0 auto;
@@ -13,16 +65,30 @@ body {
 }
 
 .tabs button {
-  font: inherit;
-  padding: 6px 12px;
+  font-family: var(--font-titulos);
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 6px 14px;
   cursor: pointer;
+  background: transparent;
+  color: var(--color-texto);
+  border: 2px solid var(--color-marca-secundario);
+  border-radius: 6px;
+}
+
+.tabs button:hover {
+  background: var(--color-borde-suave);
 }
 
 .tabs button[aria-pressed='true'] {
-  font-weight: bold;
-  border-width: 2px;
+  background: var(--color-marca);
+  border-color: var(--color-marca);
+  color: var(--color-sobre-marca);
 }
 
+/* Pantallas */
 .pantalla {
   max-width: 720px;
   margin: 0 auto;
@@ -31,8 +97,8 @@ body {
 
 .pantalla h2 {
   margin: 24px 0 8px;
-  font-size: 1.1rem;
-  border-bottom: 1px solid #ccc;
+  font-size: 1.2rem;
+  border-bottom: 2px solid var(--color-marca-secundario);
   padding-bottom: 4px;
 }
 
@@ -53,9 +119,62 @@ body {
   padding: 6px 8px;
 }
 
+.pantalla input,
+.pantalla select {
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  border: 1px solid var(--color-marca-secundario);
+  border-radius: 4px;
+}
+
+.pantalla input:focus,
+.pantalla select:focus {
+  outline: 2px solid var(--color-marca-secundario);
+  outline-offset: 1px;
+}
+
+/* Botones: secundarios con borde, principales con el color de marca. */
+.pantalla button {
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  border: 1px solid var(--color-marca-secundario);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pantalla button:hover:not(:disabled) {
+  background: var(--color-borde-suave);
+}
+
+.pantalla button[type='submit'],
+.pantalla button.primario {
+  background: var(--color-marca);
+  border-color: var(--color-marca);
+  color: var(--color-sobre-marca);
+  font-weight: 600;
+}
+
+.pantalla button[type='submit']:hover:not(:disabled),
+.pantalla button.primario:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-marca) 85%, black);
+}
+
+.pantalla button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.pantalla th {
+  font-family: var(--font-titulos);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
 .nuevo {
   padding: 12px;
-  border: 1px solid #ccc;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-marca-secundario);
   border-radius: 6px;
 }
 
@@ -90,25 +209,30 @@ body {
 }
 
 .vacio {
-  color: #777;
+  color: var(--color-texto-suave);
 }
 
 .error {
-  color: #b00020;
+  color: var(--color-error);
   margin: 4px 0;
 }
 
 .exito {
-  color: #1b5e20;
+  color: var(--color-exito);
   font-weight: bold;
   margin: 4px 0;
 }
 
-.link {
+.pantalla .link {
   background: none;
   border: none;
   padding: 0;
-  color: #0645ad;
+  color: var(--color-marca);
   text-decoration: underline;
   cursor: pointer;
+}
+
+.pantalla .link:hover:not(:disabled) {
+  background: none;
+  color: var(--color-texto);
 }

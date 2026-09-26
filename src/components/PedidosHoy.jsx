@@ -139,7 +139,7 @@ function FilaPedido({ pedido, onActualizado }) {
         <td className="precio">{formatoPrecio.format(pedido.total)}</td>
         <td>
           {siguiente && (
-            <button type="button" onClick={avanzar} disabled={guardando}>
+            <button type="button" className="primario" onClick={avanzar} disabled={guardando}>
               {guardando ? 'Guardando…' : textoAccion(pedido)}
             </button>
           )}

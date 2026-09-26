@@ -25,6 +25,9 @@ function App() {
 
   return (
     <>
+      <header className="header">
+        <div className="marca">Tío Bigotes</div>
+      </header>
       <nav className="tabs">
         {PANTALLAS.map((p) => (
           <button

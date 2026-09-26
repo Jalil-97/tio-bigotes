@@ -11,7 +11,7 @@
 }
 
 .fila .editable:hover {
-  border-color: #ccc;
+  border-color: var(--color-marca-secundario);
 }
 
 .fila > .nombre,

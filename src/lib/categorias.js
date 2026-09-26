@@ -4,6 +4,8 @@
 // pantalla.
 export const CATEGORIAS = [
   { valor: 'pizzas', label: 'Pizzas' },
+  { valor: 'calzones', label: 'Calzones' },
+  { valor: 'faina', label: 'Faina' },
   { valor: 'empanadas', label: 'Empanadas' },
   { valor: 'bebidas_con_alcohol', label: 'Bebidas con alcohol' },
   { valor: 'bebidas_sin_alcohol', label: 'Bebidas sin alcohol' },

@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { supabaseConfigError } from './lib/supabaseClient'
 import Catalogo from './components/Catalogo'
 import NuevoPedido from './components/NuevoPedido'
+import PedidosHoy from './components/PedidosHoy'
 import './App.css'
 
 const PANTALLAS = [
   { id: 'pedido', label: 'Nuevo pedido' },
+  { id: 'hoy', label: 'Pedidos de hoy' },
   { id: 'catalogo', label: 'Catálogo' },
 ]
 
@@ -35,7 +37,9 @@ function App() {
           </button>
         ))}
       </nav>
-      {pantalla === 'pedido' ? <NuevoPedido /> : <Catalogo />}
+      {pantalla === 'pedido' && <NuevoPedido />}
+      {pantalla === 'hoy' && <PedidosHoy />}
+      {pantalla === 'catalogo' && <Catalogo />}
     </>
   )
 }

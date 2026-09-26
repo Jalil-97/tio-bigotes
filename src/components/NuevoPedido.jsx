@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { CATEGORIAS } from '../lib/categorias'
 import { MEDIOS_PAGO } from '../lib/mediosPago'
+import { TIPOS_ENTREGA } from '../lib/tiposEntrega'
 import { formatoPrecio, mensajeError, porNombre } from '../lib/formato'
 import './NuevoPedido.css'
 
@@ -21,6 +22,7 @@ function NuevoPedido() {
   const [errorCarga, setErrorCarga] = useState(null)
 
   const [cliente, setCliente] = useState('')
+  const [tipoEntrega, setTipoEntrega] = useState(TIPOS_ENTREGA[0].valor)
   const [direccion, setDireccion] = useState('')
   const [medioPago, setMedioPago] = useState(MEDIOS_PAGO[0].valor)
   // Cada ítem es una copia del producto al momento de agregarlo:
@@ -108,6 +110,10 @@ function NuevoPedido() {
       setError('Falta el nombre del cliente.')
       return
     }
+    if (tipoEntrega === 'envio' && !direccion.trim()) {
+      setError('Para envío a domicilio hace falta la dirección.')
+      return
+    }
     if (items.length === 0) {
       setError('El pedido tiene que tener al menos un ítem.')
       return
@@ -123,6 +129,7 @@ function NuevoPedido() {
       .from('pedidos')
       .insert({
         cliente: cliente.trim(),
+        tipo_entrega: tipoEntrega,
         direccion: direccion.trim() || null,
         medio_pago: medioPago,
         items: items.map((it) => ({
@@ -144,6 +151,7 @@ function NuevoPedido() {
 
     setNumeroGuardado(data.numero)
     setCliente('')
+    setTipoEntrega(TIPOS_ENTREGA[0].valor)
     setDireccion('')
     setMedioPago(MEDIOS_PAGO[0].valor)
     setItems([])
@@ -166,7 +174,17 @@ function NuevoPedido() {
             <input value={cliente} onChange={(e) => setCliente(e.target.value)} />
           </label>
           <label>
-            Dirección (opcional)
+            Tipo de entrega
+            <select value={tipoEntrega} onChange={(e) => setTipoEntrega(e.target.value)}>
+              {TIPOS_ENTREGA.map((t) => (
+                <option key={t.valor} value={t.valor}>
+                  {t.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            {tipoEntrega === 'envio' ? 'Dirección' : 'Dirección (opcional)'}
             <input value={direccion} onChange={(e) => setDireccion(e.target.value)} />
           </label>
           <label>
